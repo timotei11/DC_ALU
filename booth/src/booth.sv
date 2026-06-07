@@ -8,12 +8,13 @@
 `timescale 1ns/1ps
 
 module booth (
-	      input logic	       clk,
-	      input logic	       enable,
-	      input logic	       rst_n,
-	      input logic signed [7:0] inbus,
-	      output logic	       done,
-	      output logic [7:0]      outbus
+	input logic clk,
+    input logic enable,
+    input logic rst_n,
+    input logic signed [7:0] A_in, // Operandul 1
+    input logic signed [7:0] B_in, // Operandul 2
+    output logic done,
+    output logic signed [7:0] outbus
 	      
 	      );
    //control signals
@@ -130,32 +131,13 @@ module booth (
 			      .sum(adder_o)
 			      );
 
-   // Tri-state buffers
-
-   tristate_buffer_bus #(8) M_in (
-				   .data_in(inbus),
-				   .enable(c[0]),
-				   .data_out(M_input)
-				   );
-
-   tristate_buffer_bus #(8) Q_in (
-				   .data_in(inbus),
-				   .enable(c[1]),
-				   .data_out(Q_input)
-				   );
-   tristate_buffer_bus #(8) A_out (
-				   .data_in(A_reg),
-				   .enable(c[6]),
-				   .data_out(output_buffer)
-				   );
-
-   tristate_buffer_bus #(8) Q_out (
-				   .data_in(Q_reg),
-				   .enable(c[7]),
-				   .data_out(output_buffer)
-				   );
-
-   assign outbus = output_buffer;
+  assign M_input = A_in;
+    assign Q_input = B_in;
+    // Păstrezi bufferele pentru A_outbus și Q_outbus, sau pur și simplu
+    // asignezi outbus = A_reg; (deoarece rezultatul final se află de obicei în A și Q). 
+    // Pentru un ALU de 8 biți care înmulțește 2 numere de 8 biți, rezultatul ar avea 16 biți. 
+    // Dacă ALU scoate doar 8 biți, de obicei se iau cei mai puțin semnificativi 8 biți (Q_reg).
+    assign outbus = Q_reg;
    
    
 
