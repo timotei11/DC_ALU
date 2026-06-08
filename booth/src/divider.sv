@@ -34,6 +34,11 @@ module divider (
             count <= 4'b0;
             active <= 1'b0;
             done <= 1'b0;
+        end else if (start && divisor == 0) begin
+            A <= 8'b0;
+            Q <= 8'hFF;
+            active <= 1'b0;
+            done <= 1'b1;
         end else if (start && !active) begin
             // Inițializare împărțire
             A <= 8'b0;
@@ -56,8 +61,8 @@ module divider (
                 active <= 1'b0;
                 done <= 1'b1;
             end
-        end else begin
-            done <= 1'b0; // Resetare flag done după un ciclu
+        end else if (start) begin
+            done <= 1'b0; // resetează doar când pornești o operație nouă
         end
     end
 

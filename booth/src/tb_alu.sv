@@ -5,12 +5,12 @@ module tb_alu();
     // Semnale pentru conectarea la ALU
     logic clk;
     logic rst_n;
-    logic [7:0] A;
-    logic [7:0] B;
+    logic signed [7:0] A;
+    logic signed [7:0] B;
     logic [3:0] alu_ctrl;
     logic start;
     
-    logic [7:0] result;
+    logic signed [7:0] result;
     logic Z, N, V, ready;
 
     // Instanțierea modulului Principal (Device Under Test)
@@ -72,7 +72,7 @@ module tb_alu();
         // Asteptam pana cand semnalul 'ready' devine 1
         wait(ready == 1'b1); 
         #5; // O mica pauza sa se stabilizeze rezultatul
-        $display("MUL: %d * %d = %d (Gata!)", A, B, result);
+        $display("MUL: %d * %d = %d (inmultire)", A, B, result);
 
         // ------------------------------------------------
         // Test 4: Impartire (DIV = 4'd3) - Operatie secventiala
@@ -84,7 +84,7 @@ module tb_alu();
         
         wait(ready == 1'b1);
         #5;
-        $display("DIV: %d / %d = Cât: %d", A, B, result);
+        $display("DIV: %d / %d = %d (catul)", A, B, result);
 
         // ------------------------------------------------
         // Test 5: Logic AND (AND = 4'd4)
@@ -93,6 +93,70 @@ module tb_alu();
         A = 8'b1100_1100; B = 8'b1010_1010; alu_ctrl = 4'd4;
         #10;
         $display("AND: %b & %b = %b", A, B, result);
+
+        // ------------------------------------------------
+        // Test 6: Logic OR (OR = 4'd5)
+        // ------------------------------------------------
+        #20;
+        A = 8'b11001100;
+        B = 8'b10101010;
+        alu_ctrl = 4'd5;
+        #10;
+        $display("OR : %b | %b = %b", A, B, result);
+
+        // ------------------------------------------------
+        // Test 7: Logic XOR (OR = 4'd6)
+        // ------------------------------------------------
+        #20;
+        A = 8'b11001100;
+        B = 8'b10101010;
+        alu_ctrl = 4'd6;
+        #10;
+        $display("XOR: %b ^ %b = %b", A, B, result);
+
+
+        // ------------------------------------------------
+        // Test 8: Left Shift (LSL = 4'd7)
+        // ------------------------------------------------
+        #20;
+        A = 8'd5;
+        B = 8'd2;
+        alu_ctrl = 4'd7;
+        #10;
+        $display("LSL: %d << %d = %d", A, B, result);
+
+        // ------------------------------------------------
+        // Test 9: Right Shift (LSR = 4'd8)
+        // ------------------------------------------------
+        #20;
+        A = 8'd20;
+        B = 8'd2;
+        alu_ctrl = 4'd8;
+        #10;
+        $display("LSR: %d >> %d = %d", A, B, result);
+
+        // ------------------------------------------------
+        // Test Overflow
+        // ------------------------------------------------
+        #20;
+        A = 8'd127;
+        B = 8'd1;
+        alu_ctrl = 4'd0;
+        #10;
+        $display("OVERFLOW TEST");
+        $display("A=%d B=%d RESULT=%d V=%b", A, B, result, V);
+
+
+        // ------------------------------------------------
+        // Test Signed
+        // ------------------------------------------------
+        #20;
+        A = -8'd5;
+        B = 8'd3;
+        alu_ctrl = 4'd1;
+        #10;
+        $display("SIGNED SUB");
+        $display("%d - %d = %d", A, B, result);
 
         // Incheiere simulare
         #50;

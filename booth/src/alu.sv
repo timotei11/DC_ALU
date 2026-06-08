@@ -3,12 +3,12 @@
 module alu (
     input logic clk,
     input logic rst_n,
-    input logic [7:0] A,
-    input logic [7:0] B,
+    input logic signed [7:0] A,
+    input logic signed [7:0] B,
     input logic [3:0] alu_ctrl, // Semnal de selecție operație
     input logic start,          // Semnal de start pentru operații secvențiale
     
-    output logic [7:0] result,
+    output logic signed [7:0] result,
     output logic Z, // Zero flag
     output logic N, // Negative flag
     output logic V, // Overflow flag
@@ -43,7 +43,8 @@ module alu (
     );
 
     // Semnale și instanțiere pentru Multiplicator Booth
-    logic [7:0] mul_res;
+    logic signed [15:0] mul_product;
+    logic mul_overflow;
     logic mul_done;
     
     booth booth_inst (
@@ -53,7 +54,7 @@ module alu (
         .A_in(A),   // Aici folosim modificarea menționată la pasul 1
         .B_in(B),
         .done(mul_done),
-        .outbus(mul_res)
+        .product(mul_product)
     );
 
     // Semnale și instanțiere pentru Divizor
@@ -78,26 +79,42 @@ module alu (
         ready = 1'b0;
 
         case (alu_ctrl)
-            ADD: begin result = add_sub_res; ready = 1'b1; end
-            SUB: begin result = add_sub_res; ready = 1'b1; end
-            MUL: begin result = mul_res;     ready = mul_done; end
-            DIV: begin result = div_res;     ready = div_done; end
-            AND: begin result = A & B;       ready = 1'b1; end
-            OR:  begin result = A | B;       ready = 1'b1; end
-            XOR: begin result = A ^ B;       ready = 1'b1; end
-            LSL: begin result = A << B[2:0]; ready = 1'b1; end // Shiftare folosind 3 biți din B
-            LSR: begin result = A >> B[2:0]; ready = 1'b1; end
-            default: result = 8'b0;
+            ADD: begin result = add_sub_res;            ready = 1'b1; end
+            SUB: begin result = add_sub_res;            ready = 1'b1; end
+            MUL: begin result = mul_product[7:0];       ready = mul_done; end
+            DIV: begin result = div_res;                ready = div_done; end
+            OR:  begin result = A | B;                  ready = 1'b1; end
+            AND: begin result = A & B;                  ready = 1'b1; end
+            XOR: begin result = A ^ B;                  ready = 1'b1; end
+            LSL: begin result = A << B[2:0];            ready = 1'b1; end // Shiftare folosind 3 biți din B
+            LSR: begin result = A >> B[2:0];            ready = 1'b1; end
+            default: begin result = 8'b0; ready = 1'b0; end
         endcase
     end
 
+
+    assign mul_overflow = (mul_product[15:8] != {8{mul_product[7]}});
     // Calculare Flag-uri (Se actualizează doar când rezultatul este gata)
     assign Z = (result == 8'b0) ? 1'b1 : 1'b0;
     assign N = result[7];
     
     // Overflow apare la ADD dacă numerele au același semn, dar rezultatul are semn opus
     // La SUB, overflow apare dacă scazi un număr pozitiv dintr-unul negativ și rezultatul e pozitiv, etc.
-    assign V = ((alu_ctrl == ADD) && ~(A[7] ^ B[7]) && (A[7] ^ result[7])) |
-               ((alu_ctrl == SUB) &&  (A[7] ^ B[7]) && (A[7] ^ result[7]));
-
+    assign V =
+(
+    (alu_ctrl == ADD) &&
+    ~(A[7]^B[7]) &&
+    (A[7]^result[7])
+)
+|
+(
+    (alu_ctrl == SUB) &&
+    (A[7]^B[7]) &&
+    (A[7]^result[7])
+)
+|
+(
+    (alu_ctrl == MUL) &&
+    mul_overflow
+);
 endmodule

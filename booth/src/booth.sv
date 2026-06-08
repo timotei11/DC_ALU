@@ -14,7 +14,7 @@ module booth (
     input logic signed [7:0] A_in, // Operandul 1
     input logic signed [7:0] B_in, // Operandul 2
     output logic done,
-    output logic signed [7:0] outbus
+    output logic signed [15:0] product
 	      
 	      );
    //control signals
@@ -137,7 +137,7 @@ module booth (
     // asignezi outbus = A_reg; (deoarece rezultatul final se află de obicei în A și Q). 
     // Pentru un ALU de 8 biți care înmulțește 2 numere de 8 biți, rezultatul ar avea 16 biți. 
     // Dacă ALU scoate doar 8 biți, de obicei se iau cei mai puțin semnificativi 8 biți (Q_reg).
-    assign outbus = Q_reg;
+    assign product = {A_reg,Q_reg};
    
    
 

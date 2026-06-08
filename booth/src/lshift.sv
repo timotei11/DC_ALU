@@ -16,3 +16,8 @@ module lshift (
 endmodule // lshift
 
 
+//deja e implementat in alu in always_comb
+//result = A << B[2:0];
+
+//la fel si right shift
+//result = A >> B[2:0];
