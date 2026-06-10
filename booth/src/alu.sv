@@ -5,17 +5,16 @@ module alu (
     input logic rst_n,
     input logic signed [7:0] A,
     input logic signed [7:0] B,
-    input logic [3:0] alu_ctrl, // Semnal de selecție operație
-    input logic start,          // Semnal de start pentru operații secvențiale
-    
+    input logic [3:0] alu_ctrl,
+    input logic start,
+
     output logic signed [7:0] result,
-    output logic Z, // Zero flag
-    output logic N, // Negative flag
-    output logic V, // Overflow flag
-    output logic ready // Indică dacă rezultatul este valid
+    output logic Z,
+    output logic N,
+    output logic V,
+    output logic ready
 );
 
-    // Coduri operații (OpCodes)
     localparam ADD = 4'd0;
     localparam SUB = 4'd1;
     localparam MUL = 4'd2;
@@ -26,14 +25,15 @@ module alu (
     localparam LSL = 4'd7;
     localparam LSR = 4'd8;
 
-    // Semnale interne pentru Adder
+
+    // Adder / Subtractor
+
     logic cin;
     logic [7:0] b_in;
-    logic [7:0] add_sub_res;
+    logic signed [7:0] add_sub_res;
 
-    // Configurare sumator pentru Adunare sau Scădere (complement față de 2)
-    assign cin = (alu_ctrl == SUB) ? 1'b1 : 1'b0;
-    assign b_in = (alu_ctrl == SUB) ? ~B : B;
+    assign cin  = (alu_ctrl == SUB) ? 1'b1 : 1'b0;
+    assign b_in = (alu_ctrl == SUB) ? ~B   : B;
 
     adder #(8) add_sub_inst (
         .cin(cin),
@@ -42,79 +42,92 @@ module alu (
         .sum(add_sub_res)
     );
 
-    // Semnale și instanțiere pentru Multiplicator Booth
+
+    // Booth Multiplier
+
     logic signed [15:0] mul_product;
     logic mul_overflow;
     logic mul_done;
-    
+
     booth booth_inst (
         .clk(clk),
         .enable(start && (alu_ctrl == MUL)),
         .rst_n(rst_n),
-        .A_in(A),   // Aici folosim modificarea menționată la pasul 1
+        .A_in(A),
         .B_in(B),
         .done(mul_done),
         .product(mul_product)
     );
 
-    // Semnale și instanțiere pentru Divizor
-    logic [7:0] div_res;
-    logic [7:0] remainder;
+    assign mul_overflow = mul_done &&
+                          (mul_product[15:8] != {8{mul_product[7]}});
+
+    // Signed Divider (nou)
+
+    logic signed [7:0] div_res;
+    logic signed [7:0] remainder;
     logic div_done;
+
+    // Extragem magnitudinile pentru divider-ul unsigned
+    logic [7:0] div_dividend, div_divisor;
+    logic [7:0] div_quotient_raw, div_remainder_raw;
+    logic div_negate_result; // 1 dacă câtul trebuie negat
+
+    assign div_dividend     = A[7] ? (~A + 1'b1) : A;  // |A|
+    assign div_divisor      = B[7] ? (~B + 1'b1) : B;  // |B|
+    assign div_negate_result = A[7] ^ B[7];              // semne diferite → câtul e negativ
 
     divider div_inst (
         .clk(clk),
         .rst_n(rst_n),
         .start(start && (alu_ctrl == DIV)),
-        .dividend(A),
-        .divisor(B),
-        .quotient(div_res),
-        .remainder(remainder),
+        .dividend(div_dividend),
+        .divisor(div_divisor),
+        .quotient(div_quotient_raw),
+        .remainder(div_remainder_raw),
         .done(div_done)
     );
 
-    // Multiplexor principal (Aici rutezi rezultatul final)
+    // Aplicăm semnul la câtul final
+    assign div_res   = div_done ? (div_negate_result ?
+                                   (~div_quotient_raw + 1'b1) :
+                                   div_quotient_raw) : 8'b0;
+    assign remainder = div_done ? (A[7] ?
+                                   (~div_remainder_raw + 1'b1) :
+                                   div_remainder_raw) : 8'b0;
+
+
+    // Multiplexor principal
+
     always_comb begin
         result = 8'b0;
-        ready = 1'b0;
+        ready  = 1'b0;
 
         case (alu_ctrl)
-            ADD: begin result = add_sub_res;            ready = 1'b1; end
-            SUB: begin result = add_sub_res;            ready = 1'b1; end
-            MUL: begin result = mul_product[7:0];       ready = mul_done; end
-            DIV: begin result = div_res;                ready = div_done; end
-            OR:  begin result = A | B;                  ready = 1'b1; end
-            AND: begin result = A & B;                  ready = 1'b1; end
-            XOR: begin result = A ^ B;                  ready = 1'b1; end
-            LSL: begin result = A << B[2:0];            ready = 1'b1; end // Shiftare folosind 3 biți din B
-            LSR: begin result = A >> B[2:0];            ready = 1'b1; end
+            ADD: begin result = add_sub_res;       ready = 1'b1;     end
+            SUB: begin result = add_sub_res;       ready = 1'b1;     end
+            MUL: begin result = mul_product[7:0];  ready = mul_done; end
+            DIV: begin result = div_res;           ready = div_done; end
+            AND: begin result = A & B;             ready = 1'b1;     end
+            OR:  begin result = A | B;             ready = 1'b1;     end
+            XOR: begin result = A ^ B;             ready = 1'b1;     end
+            LSL: begin result = A << B[2:0];       ready = 1'b1;     end
+            LSR: begin result = $signed(A) >>> B[2:0]; ready = 1'b1; end
             default: begin result = 8'b0; ready = 1'b0; end
         endcase
     end
 
 
-    assign mul_overflow = (mul_product[15:8] != {8{mul_product[7]}});
-    // Calculare Flag-uri (Se actualizează doar când rezultatul este gata)
-    assign Z = (result == 8'b0) ? 1'b1 : 1'b0;
-    assign N = result[7];
-    
-    // Overflow apare la ADD dacă numerele au același semn, dar rezultatul are semn opus
-    // La SUB, overflow apare dacă scazi un număr pozitiv dintr-unul negativ și rezultatul e pozitiv, etc.
-    assign V =
-(
-    (alu_ctrl == ADD) &&
-    ~(A[7]^B[7]) &&
-    (A[7]^result[7])
-)
-|
-(
-    (alu_ctrl == SUB) &&
-    (A[7]^B[7]) &&
-    (A[7]^result[7])
-)
-|
-(
-    (alu_ctrl == MUL) &&
-    mul_overflow
-);
+    // Flaguri — active doar când ready = 1
+
+    logic overflow_arith;
+
+    assign overflow_arith =
+        ((alu_ctrl == ADD) && ~(A[7] ^ B[7])     && (A[7] ^ result[7])) |
+        ((alu_ctrl == SUB) &&  (A[7] ^ B[7])     && (A[7] ^ result[7]));
+
+    assign Z = ready && (result == 8'b0);
+    assign N = ready && result[7];
+    assign V = ready && (overflow_arith | ((alu_ctrl == MUL) && mul_overflow));
+
 endmodule

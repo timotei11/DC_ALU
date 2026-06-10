@@ -12,13 +12,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	dff
 
-} {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/alu.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/alu.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module alu
-
-Top level modules:
-	alu
-
 } {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module mux2
@@ -39,26 +32,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	cu_booth
-
-} {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/booth.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/booth.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module booth
-
-Top level modules:
-	booth
-
-} {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module and3_gate
--- Compiling module and2_gate
--- Compiling module or2_gate
--- Compiling module xorn_gate
-
-Top level modules:
-	and3_gate
-	and2_gate
-	or2_gate
-	xorn_gate
 
 } {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -94,5 +67,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	jkff
+
+} {} {}} C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv {1 {vlog -work work -sv -stats=none C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module lshift
+
+Top level modules:
+	lshift
 
 } {} {}}

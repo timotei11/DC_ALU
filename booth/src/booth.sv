@@ -133,10 +133,6 @@ module booth (
 
   assign M_input = A_in;
     assign Q_input = B_in;
-    // Păstrezi bufferele pentru A_outbus și Q_outbus, sau pur și simplu
-    // asignezi outbus = A_reg; (deoarece rezultatul final se află de obicei în A și Q). 
-    // Pentru un ALU de 8 biți care înmulțește 2 numere de 8 biți, rezultatul ar avea 16 biți. 
-    // Dacă ALU scoate doar 8 biți, de obicei se iau cei mai puțin semnificativi 8 biți (Q_reg).
     assign product = {A_reg,Q_reg};
    
    

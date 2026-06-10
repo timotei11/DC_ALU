@@ -10,7 +10,7 @@ cModel Technology
 dC:/Users/Timotei/Downloads
 vadder
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1780953137
+Z1 !s110 1781108609
 !i10b 1
 !s100 8F4E9emcaQE::TD<ef>Cd0
 IGEVMR48eFkWQBI6LA7:Q71
@@ -26,7 +26,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1780953137.000000
+Z5 !s108 1781108609.000000
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/adder.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/adder.sv|
 !i113 1
@@ -36,13 +36,13 @@ valu
 R0
 R1
 !i10b 1
-!s100 @JP6>BMJK=jdBbgij_REa2
-I<=GZ@Wd:2LQ?^QII]f1l60
+!s100 AkUK;higJQM8mg5<34U3^3
+IS78mC5A706:bn0ID=T62B0
 R2
 !s105 alu_sv_unit
 S1
 R3
-w1780952789
+w1781108601
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/alu.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/alu.sv
 L0 3
@@ -58,49 +58,49 @@ R6
 R7
 vand2_gate
 R0
-Z8 !s110 1780953138
+R1
 !i10b 1
 !s100 2Ib3Qd<YdQVXYGze^NG_82
 IGcV6cl0cmCnfoRB6j46?n3
 R2
-Z9 !s105 gates_sv_unit
+Z8 !s105 gates_sv_unit
 S1
 R3
-Z10 w1780869158
-Z11 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv
-Z12 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv
+Z9 w1780869158
+Z10 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv
+Z11 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv
 L0 17
 R4
 r1
 !s85 0
 31
-Z13 !s108 1780953138.000000
-Z14 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv|
-Z15 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv|
+R5
+Z12 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv|
+Z13 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/gates.sv|
 !i113 1
 R6
 R7
 vand3_gate
 R0
-R8
+R1
 !i10b 1
 !s100 e1]L^n7o_J?8089J]AL=92
 IIgMnU0ej61jRO6=hSj=HJ3
 R2
-R9
+R8
 S1
 R3
+R9
 R10
 R11
-R12
 L0 9
 R4
 r1
 !s85 0
 31
+R5
+R12
 R13
-R14
-R15
 !i113 1
 R6
 R7
@@ -114,10 +114,10 @@ R2
 !s105 booth_sv_unit
 S1
 R3
-Z16 w1780950652
+w1780950652
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/booth.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/booth.sv
-Z17 L0 10
+Z14 L0 10
 R4
 r1
 !s85 0
@@ -130,7 +130,7 @@ R6
 R7
 vbooth_tb
 R0
-Z18 !s110 1780953139
+!s110 1781108611
 !i10b 1
 !s100 [a2hVECT6KB:V1e:8jHa23
 INR6IJ6lEY]4oX5Dl<`2@11
@@ -138,7 +138,7 @@ R2
 !s105 booth_tb_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/tb/booth_tb.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/tb/booth_tb.sv
 L0 3
@@ -146,7 +146,7 @@ R4
 r1
 !s85 0
 31
-Z19 !s108 1780953139.000000
+Z15 !s108 1781108610.000000
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/tb/booth_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/tb/booth_tb.sv|
 !i113 1
@@ -154,7 +154,7 @@ R6
 R7
 vcounter_nbits
 R0
-R8
+R1
 !i10b 1
 !s100 Ne8eZ8WUefg=XIBjZ9mmC0
 Ilo6dS3HzzgFVNU21Wi;aX0
@@ -162,7 +162,7 @@ R2
 !s105 counter_n_bits_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/counter_n_bits.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/counter_n_bits.sv
 L0 9
@@ -170,7 +170,7 @@ R4
 r1
 !s85 0
 31
-R13
+R5
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/counter_n_bits.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/counter_n_bits.sv|
 !i113 1
@@ -178,7 +178,7 @@ R6
 R7
 vcu_booth
 R0
-R8
+R1
 !i10b 1
 !s100 zd;0bdfdfiJ88bdCiK_bA0
 I5ZhRdT8UzZKi=[L=cQl8g3
@@ -194,7 +194,7 @@ R4
 r1
 !s85 0
 31
-R13
+R5
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/cu_booth.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/cu_booth.sv|
 !i113 1
@@ -202,7 +202,7 @@ R6
 R7
 vdff
 R0
-R8
+R1
 !i10b 1
 !s100 dV0jRSLZI;:z?@]LKF@`M3
 IM5lF9TdM^mVzCDN[PNcfb2
@@ -210,15 +210,15 @@ R2
 !s105 dff_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/dff.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/dff.sv
-R17
+R14
 R4
 r1
 !s85 0
 31
-R13
+R5
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/dff.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/dff.sv|
 !i113 1
@@ -226,7 +226,7 @@ R6
 R7
 vdivider
 R0
-R8
+R1
 !i10b 1
 !s100 Q`8SNOiRBJWQMkWG[9i6_1
 ImP5KFWoEU5kYMAYJfNbY63
@@ -242,7 +242,7 @@ R4
 r1
 !s85 0
 31
-R13
+R5
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/divider.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/divider.sv|
 !i113 1
@@ -250,7 +250,7 @@ R6
 R7
 vjkff
 R0
-R8
+Z16 !s110 1781108610
 !i10b 1
 !s100 1lX7EgWKa8T>bSohnSIOf2
 IR@U`fA>4]Wj]6:04HXY;;2
@@ -258,7 +258,7 @@ R2
 !s105 jkff_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/jkff.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/jkff.sv
 L0 9
@@ -266,7 +266,7 @@ R4
 r1
 !s85 0
 31
-R13
+R5
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/jkff.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/jkff.sv|
 !i113 1
@@ -274,7 +274,7 @@ R6
 R7
 vlshift
 R0
-R18
+R16
 !i10b 1
 !s100 VOZb5edlW>6J>X_C^27l:3
 IfnHkL?:;S54P^c95nR1`:3
@@ -282,7 +282,7 @@ R2
 !s105 lshift_sv_unit
 S1
 R3
-R16
+w1780953523
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv
 L0 9
@@ -290,7 +290,7 @@ R4
 r1
 !s85 0
 31
-R13
+R15
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/lshift.sv|
 !i113 1
@@ -298,7 +298,7 @@ R6
 R7
 vmux2
 R0
-R18
+R16
 !i10b 1
 !s100 Xm[4GfZDclizLfDN5IC?=0
 I5NI<MlWJd;lBF<ZRK;83E3
@@ -306,7 +306,7 @@ R2
 !s105 mux_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv
 L0 9
@@ -314,7 +314,7 @@ R4
 r1
 !s85 0
 31
-R19
+R15
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/mux.sv|
 !i113 1
@@ -322,31 +322,31 @@ R6
 R7
 vor2_gate
 R0
-R8
+R1
 !i10b 1
 !s100 N8e3_GR6AbdH2=f68WWUV0
 ISPKf9k49d6RoQ6:=_M9:_3
 R2
-R9
+R8
 S1
 R3
+R9
 R10
 R11
-R12
 L0 24
 R4
 r1
 !s85 0
 31
+R5
+R12
 R13
-R14
-R15
 !i113 1
 R6
 R7
 vregister
 R0
-R18
+R16
 !i10b 1
 !s100 6f7>O@Uz<T>h74@EC5Vni2
 IcNV46WIg>RzD=54`5jbFi0
@@ -354,7 +354,7 @@ R2
 !s105 register_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv
 L0 9
@@ -362,7 +362,7 @@ R4
 r1
 !s85 0
 31
-R19
+R15
 !s107 C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/register.sv|
 !i113 1
@@ -372,13 +372,13 @@ vtb_alu
 R0
 R1
 !i10b 1
-!s100 0Mah14JG8O434M96jDEU60
-I``Tl>:9k;Y8Iehb_=^O9S3
+!s100 XgeK@AB5H[?T]7YCnz_?K3
+INlR;D1NJR[TdhJH1K5]>b0
 R2
 !s105 tb_alu_sv_unit
 S1
 R3
-w1780953060
+w1780953213
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/tb_alu.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/tb_alu.sv
 L0 3
@@ -394,7 +394,7 @@ R6
 R7
 vtristate_buffer_bus
 R0
-R8
+R1
 !i10b 1
 !s100 k`TlT?j9Ymj^IhP]fX_YG0
 IV>o^I<nXaDLd4?1<OhecG2
@@ -402,7 +402,7 @@ R2
 !s105 buffer_sv_unit
 S1
 R3
-R10
+R9
 8C:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/buffer.sv
 FC:/Users/Timotei/OneDrive/Desktop/DC_ALU/booth/src/buffer.sv
 L0 9
@@ -418,25 +418,25 @@ R6
 R7
 vxorn_gate
 R0
-R8
+R1
 !i10b 1
 !s100 Gi?1EiR[231oIoOoOIUEm2
 IgUAKJn0F66EBOiZHjn1Fi3
 R2
-R9
+R8
 S1
 R3
+R9
 R10
 R11
-R12
 L0 32
 R4
 r1
 !s85 0
 31
+R5
+R12
 R13
-R14
-R15
 !i113 1
 R6
 R7
