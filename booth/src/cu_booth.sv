@@ -45,7 +45,7 @@ module cu_booth (
       c = 8'b0;
       case (state)
 	IDLE: begin
-		stop = 0; // resetează done când așteptăm/pornim
+		stop = 0; // reseteaza done când asteptam/pornim
 	   	if (start)
 	     	next = LOAD_M;
 	end
@@ -93,7 +93,7 @@ module cu_booth (
 	   if(start)
 	   		next = LOAD_M;
 	   else
-	   		next = STOP; // rămâne aici până la rst_n sau start nou
+	   		next = STOP; // ramane aici pana la rst_n sau start nou
 	end
 	
       endcase //case

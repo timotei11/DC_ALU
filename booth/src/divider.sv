@@ -15,13 +15,13 @@ module divider (
     logic [3:0] count;
     logic active;
 
-    // Semnale combinaționale declarate în afara blocului secvențial
+    // Semnale combinationale declarate in afara blocului secvential
     logic [7:0] next_A;
     logic [7:0] next_Q;
     logic [8:0] sub_res;
 
-    // Calculăm shiftările și scăderea concurent
-    // Extindem la 9 biți cu 1'b0 pentru a prinde bitul de "borrow" (împrumut) la scădere
+    // Calculam shiftarile si scaderea concurent
+    // Extindem la 9 biti cu 1'b0 pentru a prinde bitul de "borrow" (imprumut) la scadere
     assign next_A = {A[6:0], Q[7]};
     assign next_Q = {Q[6:0], 1'b0};
     assign sub_res = {1'b0, next_A} - {1'b0, M}; 
@@ -40,7 +40,7 @@ module divider (
             active <= 1'b0;
             done <= 1'b1;
         end else if (start && !active) begin
-            // Inițializare împărțire
+            // Initializare impartire
             A <= 8'b0;
             Q <= dividend;
             M <= divisor;
@@ -49,12 +49,12 @@ module divider (
             done <= 1'b0;
         end else if (active) begin
             if (count > 0) begin
-                if (sub_res[8] == 1'b0) begin // Dacă next_A >= M (niciun împrumut la scădere)
-                    A <= sub_res[7:0];        // Salvăm rezultatul scăderii
-                    Q <= {next_Q[7:1], 1'b1}; // Setăm LSB din Q la 1
-                end else begin                // Dacă next_A < M
-                    A <= next_A;              // Refacere (restoring) la valoarea shiftată
-                    Q <= next_Q;              // LSB rămâne 0
+                if (sub_res[8] == 1'b0) begin // Daca next_A >= M (niciun imprumut la scadere)
+                    A <= sub_res[7:0];        // Salvam rezultatul scaderii
+                    Q <= {next_Q[7:1], 1'b1}; // Setam LSB din Q la 1
+                end else begin                // Daca next_A < M
+                    A <= next_A;              // Refacere (restoring) la valoarea shiftata
+                    Q <= next_Q;              // LSB ramane 0
                 end
                 count <= count - 1;
             end else begin
@@ -62,11 +62,11 @@ module divider (
                 done <= 1'b1;
             end
         end else if (start) begin
-            done <= 1'b0; // resetează doar când pornești o operație nouă
+            done <= 1'b0; // reseteaza doar cand pornesti o operatie noua
         end
     end
 
-    // Conectarea rezultatelor la ieșirile modulului
+    // Conectarea rezultatelor la iesirile modulului
     assign quotient = Q;
     assign remainder = A;
 

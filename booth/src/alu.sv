@@ -68,14 +68,14 @@ module alu (
     logic signed [7:0] remainder;
     logic div_done;
 
-    // Extragem magnitudinile pentru divider-ul unsigned
+    // Extragem magnitudinile pentru divider ul unsigned
     logic [7:0] div_dividend, div_divisor;
     logic [7:0] div_quotient_raw, div_remainder_raw;
-    logic div_negate_result; // 1 dacă câtul trebuie negat
+    logic div_negate_result; // 1 daca catul trebuie negat
 
     assign div_dividend     = A[7] ? (~A + 1'b1) : A;  // |A|
     assign div_divisor      = B[7] ? (~B + 1'b1) : B;  // |B|
-    assign div_negate_result = A[7] ^ B[7];              // semne diferite → câtul e negativ
+    assign div_negate_result = A[7] ^ B[7];              // semne diferite -> catul e negativ
 
     divider div_inst (
         .clk(clk),
@@ -88,7 +88,7 @@ module alu (
         .done(div_done)
     );
 
-    // Aplicăm semnul la câtul final
+    // Aplicam semnul la catul final
     assign div_res   = div_done ? (div_negate_result ?
                                    (~div_quotient_raw + 1'b1) :
                                    div_quotient_raw) : 8'b0;
@@ -118,7 +118,7 @@ module alu (
     end
 
 
-    // Flaguri — active doar când ready = 1
+    // Flaguri - active doar cand ready = 1
 
     logic overflow_arith;
 

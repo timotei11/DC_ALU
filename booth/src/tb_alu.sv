@@ -13,7 +13,7 @@ module tb_alu();
     logic signed [7:0] result;
     logic Z, N, V, ready;
 
-    // Instanțierea modulului Principal (Device Under Test)
+    // Instantierea modulului Principal (Device Under Test)
     alu dut (
         .clk(clk),
         .rst_n(rst_n),
@@ -33,7 +33,7 @@ module tb_alu();
 
     // Blocul principal de testare
     initial begin
-        // Inițializare semnale
+        // Initializare semnale
         clk = 0;
         rst_n = 0;
         A = 8'd0;
